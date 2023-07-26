@@ -8,7 +8,7 @@ import Chart from "./component/chart";
 import Header from "./component/header";
 import img from "./assets/wheat-fields-4439896_1920.jpg";
 
-const HomePage = () => {
+const FirebaseHome  = () => {
   const host = "192.168.100.156";
   const [data, setData] = useState([]);
   const [manualMode, setManualMode] = useState(false);
@@ -19,16 +19,74 @@ const HomePage = () => {
       const interval = setInterval(() => {
         fetchData();
         fetchChart();
-      }, 10000);
+      }, 1000);
       return () => {
         clearInterval(interval);
       };
     }
   }, [manualMode]);
 
+  // Example data for fetchChart
+const cData = {
+    status: "Success",
+    data: [
+      {
+        id: 1034,
+        date_time: "2023-07-25T15:06:24.000Z",
+        level: "-15",
+        temp: "30",
+        humi: "55",
+        pump: "off",
+        mode: "auto",
+      },
+      {
+        id: 1033,
+        date_time: "2023-07-25T15:06:18.000Z",
+        level: "5",
+        temp: "25.78",
+        humi: "51.59",
+        pump: "off",
+        mode: "auto",
+      },
+      {
+        id: 1032,
+        date_time: "2023-07-25T15:06:11.000Z",
+        level: "5",
+        temp: "25.80",
+        humi: "51.70",
+        pump: "off",
+        mode: "auto",
+      },
+      {
+        id: 1031,
+        date_time: "2023-07-25T15:05:58.000Z",
+        level: "5",
+        temp: "25.82",
+        humi: "52.17",
+        pump: "off",
+        mode: "auto",
+      },
+    ],
+  };
+  
+  // Example data for fetchData
+  const Ldata = {
+    status: "Success",
+    data: {
+      id: 1034,
+      date_time: "2023-07-25T15:06:24.000Z",
+      level: "-15",
+      temp: "30",
+      humi: "55",
+      pump: "off",
+      mode: "auto",
+    },
+  };
+  
+
   const fetchData = async () => {
     try {
-      const response = await fetch("http://" + host + ":9000/data");
+      const response = Ldata
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }
@@ -47,23 +105,12 @@ const HomePage = () => {
   };
   const fetchChart = async () => {
     try {
-      const response = await fetch("http://" + host + ":9000/chart");
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-      const jsonData = await response.json();
-      // console.log("Data received from the server:", jsonData);
-      // console.log("Data received from the server:", jsonData.status);
-      // console.log("Data received from the server:", jsonData.data);
-
+      const jsonData = cData; // Directly use the data object here
+      console.log("Data received from the server:", jsonData);
+  
       if (jsonData && jsonData.status === "Success" && jsonData.data) {
         const formattedData = jsonData.data.map((dataPoint) => {
-          const validDate = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(
-            dataPoint.date_time
-          );
-          const date_time = validDate
-            ? dataPoint.date_time
-            : format(new Date(dataPoint.date_time), "yyyy-MM-dd HH:mm:ss");
+          const date_time = new Date(dataPoint.date_time).toLocaleString();
           return { ...dataPoint, date_time };
         });
         setChartData(formattedData);
@@ -223,4 +270,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FirebaseHome ;
