@@ -9,7 +9,7 @@ import Header from "./component/header";
 import img from "./assets/wheat-fields-4439896_1920.jpg";
 
 const HomePage = () => {
-  const host = "192.168.100.156";
+  const host = "192.168.1.19";
   const [data, setData] = useState([]);
   const [manualMode, setManualMode] = useState(false);
   const [chartData, setChartData] = useState([]);
@@ -18,7 +18,7 @@ const HomePage = () => {
     if (!manualMode) {
       const interval = setInterval(() => {
         fetchData();
-        // fetchChart();
+        fetchChart();
       }, 10000);
       return () => {
         clearInterval(interval);
