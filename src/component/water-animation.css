@@ -1,0 +1,68 @@
+.ani-container {
+padding-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  /* height: 500px; */
+}
+
+.glass {
+  background: rgba(228, 225, 225, 0.5);
+  width: 300px;
+  height: 400px;
+  position: relative;
+  border-radius: 5px;
+  /* overflow: hidden; */
+  /* margin-top: 64px; */
+}
+.water{
+  background-color: none
+
+}
+.waterhigh {
+  /* background-image: url("https://priteshgupta.com/demos/fill/waves.png");*/
+  background-color: rgba(45, 103, 228, 0.39);
+  /* background-position: top right; */
+  position: absolute;
+  margin: 0;
+  bottom: 0;
+  width: 300px;
+  height: 0;
+  border-radius: 5px;
+  -webkit-transition: height 1s ease-out;
+  -moz-transition: height 1s ease-out;
+  -o-transition: height 1s ease-out;
+  transition: height 0.5s ease-out;
+  
+}
+
+.waterlow {
+  background-color: rgba(228, 45, 91, 0.39);
+  /* background-position: top right; */
+  position: absolute;
+  margin: 0;
+  bottom: 0;
+  width: 300px;
+  height: 0;
+  border-radius: 5px;
+  -webkit-transition: height 1s ease-out;
+  -moz-transition: height 1s ease-out;
+  -o-transition: height 1s ease-out;
+  transition: height 1s ease-out;
+}
+/* #water {
+  height: 0;
+  -webkit-transition: height 2s ease-out;
+  -moz-transition: height 2s ease-out;
+  -o-transition: height 2s ease-out;
+  transition: height 2s ease-out;
+} */
+/* .glass:hover #water {
+  background-position: top left;
+  height: 0;
+  background-position: top left;
+  -webkit-transition: all 3s ease-out;
+  -moz-transition: all 3s ease-out;
+  -o-transition: all 3s ease-out;
+  transition: all 3s ease-out;
+} */

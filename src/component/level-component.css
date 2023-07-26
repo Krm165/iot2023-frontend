@@ -1,0 +1,40 @@
+
+.butt-setvl{
+    margin: 16px 0 0 0;
+    display: flex;
+    justify-content: center;
+}
+  
+  .data {
+    margin-bottom: 20px;
+  }
+  
+  .level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+  }
+  
+  .senser {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .manual {
+    margin-top: 16px;
+  }
+  
+  .chart {
+    width: 100%;
+  }
+  
+  input[type='text'] {
+    margin-right: 10px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
