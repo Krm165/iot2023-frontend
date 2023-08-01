@@ -42,7 +42,7 @@ const Chart = ({ chartData, dateT, dataWL }) => {
               angle={-45}
               textAnchor="end"
             />
-            <YAxis domain={[-20, 20]} tickCount={10} />
+            <YAxis domain={[-20, 15]} tickCount={8} />
             <CartesianGrid strokeDasharray="2 2" />
             <Tooltip />
             <Area
@@ -73,14 +73,15 @@ const Chart = ({ chartData, dateT, dataWL }) => {
             padding={{ right: 32 }}
           >
             <defs>
+            <linearGradient id="colorHumi" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="50%" stopColor="#99CC33" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#99CC33" stopOpacity={0} />
+              </linearGradient>
               <linearGradient id="colorTemp" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="50%" stopColor="#FF6666" stopOpacity={0.8} />
                 <stop offset="95%" stopColor="#FF6666" stopOpacity={0} />
               </linearGradient>
-              <linearGradient id="colorHumi" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="50%" stopColor="#99CC33" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#99CC33" stopOpacity={0} />
-              </linearGradient>
+
             </defs>
             <XAxis
               dataKey="date_time"

@@ -16,13 +16,8 @@ const FirebaseHome  = () => {
 
   useEffect(() => {
     if (!manualMode) {
-      const interval = setInterval(() => {
         fetchData();
         fetchChart();
-      }, 1000);
-      return () => {
-        clearInterval(interval);
-      };
     }
   }, [manualMode]);
 
@@ -86,14 +81,9 @@ const cData = {
 
   const fetchData = async () => {
     try {
-      const response = Ldata
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-
-      const jsonData = await response.json();
+      const jsonData = Ldata; // Use the example data directly
       console.log("Data received from the server:", jsonData);
-
+  
       if (jsonData && jsonData.status === "Success" && jsonData.data) {
         setData(jsonData.data);
       } else {
@@ -105,7 +95,7 @@ const cData = {
   };
   const fetchChart = async () => {
     try {
-      const jsonData = cData; // Directly use the data object here
+      const jsonData = cData; // Use the example data directly
       console.log("Data received from the server:", jsonData);
   
       if (jsonData && jsonData.status === "Success" && jsonData.data) {
@@ -121,6 +111,7 @@ const cData = {
       console.error("Error fetching data:", error.message);
     }
   };
+  
   const handleAddData = async (newData, temp, humi) => {
     console.log("Sending data to server:", newData);
     try {

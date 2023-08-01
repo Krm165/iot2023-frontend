@@ -31,10 +31,14 @@ const marks = [
     value: 5,
     label: "5 Cm",
   },
+  {
+    value: 10,
+    label: "10 Cm",
+  },
 ];
 
 const Wlevel = (props) => {
-  const [sliderValue, setSliderValue] = useState(props.level);
+  const [sliderValue, setSliderValue] = useState(parseInt(props.level, 10));
   const {handleManual} = props;
 
   const handleSliderChange = (event, newValue) => {
@@ -64,14 +68,14 @@ const Wlevel = (props) => {
         aria-label="Water Level"
         value={sliderValue}
         onChange={handleSliderChange}
-        color={sliderValue < -5 ? "error" : "primary"}
+        color={sliderValue < -5 || sliderValue > 5 ? "error" : "primary"}
         track="inverted"
         aria-labelledby="track-inverted-slider"
         getAriaValueText={valuetext}
         defaultValue={30}
         marks={marks}
         min={-15}
-        max={5}
+        max={10}
         step={5}
       />
       <div className="butt-setvl" style={{ margin: "32px 0 0 0" }}>

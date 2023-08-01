@@ -11,7 +11,7 @@ function App() {
       <Header/>
       <div className="app">
         <HomePage />
-        <firebase/>
+        {/* <FirebaseHome/> */}
       </div>
     </div>
   );

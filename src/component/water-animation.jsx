@@ -5,23 +5,20 @@ const WaterAnimation = ({ waterLevel, maxWaterHeight }) => {
   const [waterHeight, setWaterHeight] = useState(0);
 
   useEffect(() => {
-    let targetHeight = 0;
-    if (waterLevel <= -15) {
-      targetHeight = maxWaterHeight * 0.1;
-    } else if (waterLevel <= -10) {
-      targetHeight = maxWaterHeight * 0.3;
-    } else if (waterLevel <= -5) {
-      targetHeight = maxWaterHeight * 0.7;
-    } else if (waterLevel <= 0) {
-      targetHeight = maxWaterHeight * 0.9;
-    } else if (waterLevel <= 5) {
-      targetHeight = maxWaterHeight * 1.2;
-    } else {
-      targetHeight = maxWaterHeight;
+    const factors = [-15, -10, -5, 0, 5, 10];
+    const targetHeights = [0.063, 0.28, 0.495, 0.715, 0.935, 1.157];
+
+    let targetHeight = maxWaterHeight;
+    for (let i = 0; i < factors.length; i++) {
+      if (waterLevel <= factors[i]) {
+        targetHeight = maxWaterHeight * targetHeights[i];
+        break;
+      }
     }
 
     setWaterHeight(targetHeight);
   }, [waterLevel, maxWaterHeight]);
+
 
   return (
     <div className="ani-container">
@@ -29,7 +26,7 @@ const WaterAnimation = ({ waterLevel, maxWaterHeight }) => {
         <div
           id="water"
           className={
-            waterLevel === null
+            waterLevel === null ||waterLevel === ""
               ? "water"
               : waterLevel < -5
               ? "waterlow"
@@ -37,6 +34,14 @@ const WaterAnimation = ({ waterLevel, maxWaterHeight }) => {
           }
           style={{ height: `${waterHeight}px` }}
         ></div>
+        <div className="Cmlevel">
+          <h3> 10 Cm</h3>
+          <h3> 5 Cm</h3>
+          <h3> 0 Cm</h3>
+          <h3>-5 Cm</h3>
+          <h3>-10 Cm</h3>
+          <h3>-15 Cm</h3>
+        </div>
       </div>
     </div>
   );

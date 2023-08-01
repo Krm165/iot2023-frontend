@@ -8,8 +8,10 @@ import Chart from "./component/chart";
 import Header from "./component/header";
 import img from "./assets/wheat-fields-4439896_1920.jpg";
 
+import { fetchChart, fetchData } from "./service/API.service";
+
 const HomePage = () => {
-  const host = "192.168.100.156";
+  const host = "192.168.1.19";
   const [data, setData] = useState([]);
   const [manualMode, setManualMode] = useState(false);
   const [chartData, setChartData] = useState([]);
@@ -17,63 +19,15 @@ const HomePage = () => {
   useEffect(() => {
     if (!manualMode) {
       const interval = setInterval(() => {
-        fetchData();
-        fetchChart();
-      }, 10000);
+        fetchData(host, setData);
+        fetchChart(host, setChartData, format);
+      }, 2500);
       return () => {
         clearInterval(interval);
       };
     }
   }, [manualMode]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://" + host + ":9000/data");
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-
-      const jsonData = await response.json();
-      console.log("Data received from the server:", jsonData);
-
-      if (jsonData && jsonData.status === "Success" && jsonData.data) {
-        setData(jsonData.data);
-      } else {
-        console.error("Error fetching data: Invalid server response format.");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-  const fetchChart = async () => {
-    try {
-      const response = await fetch("http://" + host + ":9000/chart");
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-      const jsonData = await response.json();
-      // console.log("Data received from the server:", jsonData);
-      // console.log("Data received from the server:", jsonData.status);
-      // console.log("Data received from the server:", jsonData.data);
-
-      if (jsonData && jsonData.status === "Success" && jsonData.data) {
-        const formattedData = jsonData.data.map((dataPoint) => {
-          const validDate = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(
-            dataPoint.date_time
-          );
-          const date_time = validDate
-            ? dataPoint.date_time
-            : format(new Date(dataPoint.date_time), "yyyy-MM-dd HH:mm:ss");
-          return { ...dataPoint, date_time };
-        });
-        setChartData(formattedData);
-      } else {
-        console.error("Error fetching data: Invalid server response format.");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    }
-  };
   const handleAddData = async (newData, temp, humi) => {
     console.log("Sending data to server:", newData);
     try {
@@ -135,7 +89,7 @@ const HomePage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ level: newData, pump:"on" ,mode: "manual" }),
+        body: JSON.stringify({ level: newData, pump: "on", mode: "manual" }),
       });
       const responseData = await response.json();
 
@@ -171,10 +125,7 @@ const HomePage = () => {
         <div className="container">
           <div className="data">
             <div className="ani-level">
-              <WaterAnimation
-                waterLevel={data.level}
-                maxWaterHeight={300}
-              />
+              <WaterAnimation waterLevel={data.level} maxWaterHeight={300} />
             </div>
             <div className="level">
               <h1>{data.level} Cm</h1>
