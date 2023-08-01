@@ -1,6 +1,6 @@
 export const fetchData = async (host, setData) => {
     try {
-      const response = await fetch("http://" + host + "/data");
+      const response = await fetch(host + "/data");
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }
@@ -20,7 +20,7 @@ export const fetchData = async (host, setData) => {
   
   export const fetchChart = async (host, setChartData, format) => {
     try {
-      const response = await fetch("http://" + host + "/chart");
+      const response = await fetch(host + "/chart");
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }

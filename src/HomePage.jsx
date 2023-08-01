@@ -31,7 +31,7 @@ const HomePage = () => {
   const handleAddData = async (newData, temp, humi) => {
     console.log("Sending data to server:", newData);
     try {
-      const response = await fetch("http://" + host + "/data", {
+      const response = await fetch(host + "/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const HomePage = () => {
   const handleUpdate = async (newData) => {
     console.log("Updating last data on the server:", newData);
     try {
-      const response = await fetch("http://" + host + "/data", {
+      const response = await fetch(host + "/data", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const HomePage = () => {
   };
   const handleManual = async (newData) => {
     try {
-      const response = await fetch("http://" + host + "/mode", {
+      const response = await fetch(host + "/mode", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
