@@ -26,6 +26,7 @@ const HomePage = () => {
         clearInterval(interval);
       };
     }
+  
   }, [manualMode]);
 
   const handleAddData = async (newData, temp, humi) => {
