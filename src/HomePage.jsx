@@ -11,7 +11,7 @@ import img from "./assets/wheat-fields-4439896_1920.jpg";
 import { fetchChart, fetchData } from "./service/API.service";
 
 const HomePage = () => {
-  const host = "192.168.1.19";
+  const host = "https://dull-shorts-seal.cyclic.cloud";
   const [data, setData] = useState([]);
   const [manualMode, setManualMode] = useState(false);
   const [chartData, setChartData] = useState([]);
@@ -31,7 +31,7 @@ const HomePage = () => {
   const handleAddData = async (newData, temp, humi) => {
     console.log("Sending data to server:", newData);
     try {
-      const response = await fetch("http://" + host + ":9000/data", {
+      const response = await fetch("http://" + host + "/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const HomePage = () => {
   const handleUpdate = async (newData) => {
     console.log("Updating last data on the server:", newData);
     try {
-      const response = await fetch("http://" + host + ":9000/data", {
+      const response = await fetch("http://" + host + "/data", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const HomePage = () => {
   };
   const handleManual = async (newData) => {
     try {
-      const response = await fetch("http://" + host + ":9000/mode", {
+      const response = await fetch("http://" + host + "/mode", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
